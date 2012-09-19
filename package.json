@@ -2,7 +2,7 @@
   "name": "brewmath",
   "version": "0.0.1",
   "description": "Brewing math library",
-  "main": "lib/main.js",
+  "main": "brewmath.js",
   "directories": {
     "test": "test"
   },
