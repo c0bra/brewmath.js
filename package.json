@@ -1,0 +1,30 @@
+{
+  "name": "brewmath",
+  "version": "0.0.1",
+  "description": "Brewing math library",
+  "main": "lib/main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/c0bra/brewmath.js"
+  },
+  "keywords": [
+    "brew",
+    "brewery",
+    "brewing",
+    "beer",
+    "math"
+  ],
+  "author": "Brian Hann",
+  "license": "BSD",
+  "devDependencies": {
+  	// Use any version
+  	"mocha": "",
+  	"should": ""
+  }
+}
