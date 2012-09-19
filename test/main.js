@@ -1,5 +1,5 @@
 var should = require('should');
-var brewmatch = require('../lib/main');
+var brewmath = require('../lib/main');
 
 describe('brewmath', function() {
 	describe('with no arguments', function() {
