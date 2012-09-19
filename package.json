@@ -23,7 +23,6 @@
   "author": "Brian Hann",
   "license": "BSD",
   "devDependencies": {
-  	// Use any version
   	"mocha": "",
   	"should": ""
   }
