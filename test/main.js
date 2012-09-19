@@ -20,3 +20,34 @@ describe('adf', function() {
 		});
 	});
 });
+
+describe('utilizationTinseth', function() {
+	describe('with good arguments', function() {
+		it('returns the right utilization percentage', function() {
+			var gravity = 1.050;
+			var timeBoiledMin = 60;
+			
+			var util = brewmath.utilizationTinseth(gravity, timeBoiledMin);
+			
+			// Trim the utilization down to 2 decimals to test it
+			parseFloat(util.toFixed(2)).should.eql(0.23);
+		});
+	});
+});
+
+describe('bitternessTinseth', function() {
+	describe('with good arguments', function() {
+		it('returns the right bitterness units', function() {
+			var gravity = 1.050;
+			var volGal = 5;
+			var AApercent = 5.0;
+			var weightOz = 2;
+			var timeBoiledMin = 60;
+			
+			var bu = brewmath.bitternessTinseth(gravity, volGal, AApercent, weightOz, timeBoiledMin);
+			
+			// Round the bitterness units to test it
+			Math.round(bu).should.eql(35);
+		});
+	});
+});
