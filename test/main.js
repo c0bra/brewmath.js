@@ -1,8 +1,6 @@
 var should = require('should');
 var brewmath = require('../brewmath');
 
-console.log(brewmath);
-
 describe('abv', function() {
 	describe('with good arguments', function() {
 		it('returns the right alcohol percentage', function() {
@@ -47,7 +45,24 @@ describe('bitternessTinseth', function() {
 			var bu = brewmath.bitternessTinseth(gravity, volGal, AApercent, weightOz, timeBoiledMin);
 			
 			// Round the bitterness units to test it
-			Math.round(bu).should.eql(35);
+			parseFloat(bu.toFixed(1)).should.eql(34.6);
+		});
+	});
+});
+
+describe('bitternessRager', function() {
+	describe('with good arguments', function() {
+		it('returns the right bitterness units', function() {
+			var gravity = 1.050;
+			var volGal = 5;
+			var AApercent = 5.0;
+			var weightOz = 2;
+			var timeBoiledMin = 60;
+			
+			var bu = brewmath.bitternessRager(gravity, volGal, AApercent, weightOz, timeBoiledMin);
+			
+			// Round the bitterness units to test it
+			Math.round(bu).should.eql(46);
 		});
 	});
 });

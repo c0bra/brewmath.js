@@ -9,7 +9,44 @@
 	function Brewmath() {}
 	brewmath = function () { return new Brewmath(); }
 	
-	// Hop utilization table
+	/* Generic Math Functions */
+	
+	function rational_tanh(x) {
+    if( x < -3 ) {
+			return -1;
+    }
+    else if( x > 3 ) {
+			return 1;
+    }
+    else {
+			return x * ( 27 + x * x ) / ( 27 + 9 * x * x );
+    }
+	}
+	
+	function approx_tanh(x) {
+		return (Math.exp(x) - Math.exp(-x)) / (Math.exp(x) + Math.exp(-x));
+	}
+	
+	function maybe_tanh(arg) {
+    var pos = Math.exp(arg);
+    var neg = Math.exp(-arg);
+    return (pos - neg) / (pos + neg);
+	}
+	
+	function other_tanh(x){
+     var e = Math.exp(2*x);
+     return (e-1)/(e+1);
+	}
+
+	
+	function tanh(x) {
+		//return rational_tanh(x);
+		//return approx_tanh(x);
+		//return maybe_tanh(x);
+		return other_tanh(x); // Using for now as it seems accurate and fast
+	}
+	
+	/* ALCOHOL */
 	
 	// Calculate the alcohol percentage by volume
 	brewmath.abv = function (og, fg) {
@@ -24,7 +61,7 @@
 	
 	// Pitching rate (volume?)
 	
-	// Hop bitterness
+	/* HOPS */
 	
 	// HBU
 	brewmath.hbu = function(AApercent, weightOz) {
@@ -41,25 +78,50 @@
 		return AApercent * weightOz / volGal;
 	}
 	
-	// Hop utilization % according to the Rager formula
-	brewmath.utilizationRager = function() {
+	// Hop utilization % according to Rager
+	brewmath.utilizationRager = function(timeBoiledMin) {
+		//var util = 18.11 + 13.86 * hyptan[(timeBoiledMin - 31.32) / 18.27];
+		var util = (18.11 + 13.86 * tanh( (timeBoiledMin - 31.32) / 18.27 )) / 100;
 		
+		return util;
 	}
 	
-	// Hop utilization % according to the Rager formula
+	// Hop bitterness according to the Rager formula
+	brewmath.bitternessRager = function(gravity, volGal, AApercent, weightOz, timeBoiledMin) {
+		var AAdecimal = parseFloat(AApercent) / 100;
+		
+		var util = brewmath.utilizationRager(timeBoiledMin);
+		
+		console.log("Util: " + util);
+		
+		// According to Rager, if the gravity of the boil exceeds 1.050, there is a gravity adjustment (GA) to factor in:
+		var gravityAdjustment = 0;
+		if (gravity > 1.050) {
+			gravityAdjustment = (gravity - 1.050) / 0.2;
+		}
+		
+		console.log("ga: " + gravityAdjustment);
+		
+		var bu = (weightOz * util * AAdecimal * 7462) / (volGal * (1 + gravityAdjustment));
+		
+		console.log(weightOz, util, AAdecimal, volGal, gravityAdjustment);
+		
+		return bu;
+	}
+	
+	// Hop utilization % according to Tinseth
 	brewmath.utilizationTinseth = function(gravity, timeBoiledMin) {
 		var gravityUnits = parseFloat(gravity) - 1;
 		
 		return 1.65 * Math.pow(0.000125, gravityUnits) * (1 - Math.exp(-0.04 * timeBoiledMin)) / 4.15;
 	}
 	
+	// Hop bitteress according to the Tinseth formula
 	brewmath.bitternessTinseth = function(gravity, volGal, AApercent, weightOz, timeBoiledMin) {
 		var AAdecimal = parseFloat(AApercent) / 100;
 		
 		// Get the utilization
 		var util = brewmath.utilizationTinseth(gravity, timeBoiledMin);
-		
-		console.log(util);
 		
 		var mgPerLiter = AAdecimal * weightOz * 7490 / volGal;
 		
@@ -77,6 +139,10 @@
 	brewmath.EBCtoSRM = function(ebc) {
 		
 	}
+	
+	/* KEGGING */
+	
+	
 	
 	/*===========================================
 		Exposing Brewmath (stolen from moment.js)
