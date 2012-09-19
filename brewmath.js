@@ -92,19 +92,13 @@
 		
 		var util = brewmath.utilizationRager(timeBoiledMin);
 		
-		console.log("Util: " + util);
-		
 		// According to Rager, if the gravity of the boil exceeds 1.050, there is a gravity adjustment (GA) to factor in:
 		var gravityAdjustment = 0;
 		if (gravity > 1.050) {
 			gravityAdjustment = (gravity - 1.050) / 0.2;
 		}
 		
-		console.log("ga: " + gravityAdjustment);
-		
 		var bu = (weightOz * util * AAdecimal * 7462) / (volGal * (1 + gravityAdjustment));
-		
-		console.log(weightOz, util, AAdecimal, volGal, gravityAdjustment);
 		
 		return bu;
 	}
