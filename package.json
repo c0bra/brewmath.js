@@ -22,9 +22,7 @@
   ],
   "author": "Brian Hann",
   "license": "BSD",
-  "dependencies": {
-  	"js-quantities": ""
-  },
+  "dependencies": {},
   "devDependencies": {
   	"mocha": "",
   	"should": ""
