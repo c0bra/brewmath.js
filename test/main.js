@@ -66,3 +66,49 @@ describe('bitternessRager', function() {
 		});
 	});
 });
+
+/*======== Color Tests ========*/
+
+describe('EBCtoSRM', function() {
+	describe('with 50', function() {
+		it('returns 25.4', function() {
+						
+			var srm = brewmath.EBCtoSRM(50);
+			
+			srm.should.eql(25.4);
+		});
+	});
+});
+
+describe('EBCtoSRM', function() {
+	describe('with 0', function() {
+		it('returns 0', function() {
+						
+			var srm = brewmath.EBCtoSRM(0);
+			
+			srm.should.eql(0);
+		});
+	});
+});
+
+describe('SRMtoEBC', function() {
+	describe('with 50', function() {
+		it('returns 98.5', function() {
+						
+			var srm = brewmath.SRMtoEBC(50);
+			
+			srm.should.eql(98.5);
+		});
+	});
+});
+
+describe('SRMtoEBC', function() {
+	describe('with 0', function() {
+		it('returns 0', function() {
+						
+			var srm = brewmath.SRMtoEBC(0);
+			
+			srm.should.eql(0);
+		});
+	});
+});

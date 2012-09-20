@@ -9,7 +9,7 @@
 	function Brewmath() {}
 	brewmath = function () { return new Brewmath(); }
 	
-	/* Generic Math Functions */
+	/********* Generic Math Functions *********/
 	
 	function rational_tanh(x) {
     if( x < -3 ) {
@@ -46,7 +46,7 @@
 		return other_tanh(x); // Using for now as it seems accurate and fast
 	}
 	
-	/* ALCOHOL */
+	/********* ALCOHOL *********/
 	
 	// Calculate the alcohol percentage by volume
 	brewmath.abv = function (og, fg) {
@@ -59,9 +59,11 @@
 		return parseInt( (100 * ((og - fg) / (og-1))).toFixed(0) );
 	}
 	
+	/********** YEAST *********/
+	
 	// Pitching rate (volume?)
 	
-	/* HOPS */
+	/********* HOPS *********/
 	
 	// HBU
 	brewmath.hbu = function(AApercent, weightOz) {
@@ -124,15 +126,17 @@
 		return bu;
 	}
 	
-	/* COLOR */
+	/********* COLOR *********/
 	
 	brewmath.SRMtoEBC = function(srm) {
-		
+		return srm * 1.97
 	}
 	
 	brewmath.EBCtoSRM = function(ebc) {
-		
+		return ebc * .508;
 	}
+	
+	// TODO: Color of beer based on grain Lovibond and amount
 	
 	/* KEGGING */
 	
