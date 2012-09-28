@@ -93,3 +93,29 @@ describe "SRMtoEBC", ->
       srm = brewmath.SRMtoEBC(0)
       srm.should.eql 0
 
+
+#
+# Mash Tests
+#
+
+describe "StrikeTemperature", ->
+  describe "missing grainWeight", ->
+    it "throws an error", ->
+
+  describe "missing grainTemp", ->
+    it "throws an error", ->
+
+  describe "missing targetTemp", ->
+    it "throws an error", ->
+
+  describe "missing grain:water ratio", ->
+    it "throws an error", ->  
+
+  describe "with good input", ->
+    it "returns a good result", ->
+      grainWeight = 10
+      grainTemp = 72
+      targetTemp = 154
+      ratio = 1.25
+      strikeTemp = brewmath.StrikeTemperature(grainWeight, grainTemp, targetTemp, 1.25)
+      strikeTemp.should.equal 167.12

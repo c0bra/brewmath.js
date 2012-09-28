@@ -1,64 +1,3 @@
-
-
-
-
-# Calculate the alcohol percentage by volume
-# ***TODO: test IE's compatibility with toFixed()
-
-# Calculate the apparent degree of fermentation, returned as an integer, not decimal.
-#   i.e. 66 not 0.66
-
-###
-YEAST ********
-###
-
-# Pitching rate (volume?)
-
-###
-HOPS ********
-###
-
-# HBU
-
-# AAU (Alpha Acid Units)
-
-# IBU (International Bittering Units)
-
-# Hop utilization % according to Rager
-
-#var util = 18.11 + 13.86 * hyptan[(timeBoiledMin - 31.32) / 18.27];
-
-# Hop bitterness according to the Rager formula
-
-# According to Rager, if the gravity of the boil exceeds 1.050, there is a gravity adjustment (GA) to factor in:
-
-# Hop utilization % according to Tinseth
-
-# Hop bitteress according to the Tinseth formula
-
-# Get the utilization
-
-###
-COLOR ********
-###
-
-# TODO: Color of beer based on grain Lovibond and amount
-
-# KEGGING 
-
-#===========================================
-#   Exposing Brewmath (stolen from moment.js)
-# ===========================================
-
-# CommonJS module is defined
-
-#global ender:false 
-
-# here, `this` means `window` in the browser, or `global` on the server
-# add `moment` as a global object via a string identifier,
-# for Closure Compiler "advanced" mode
-
-#global define:false 
 (->
   brewmath = undefined
   VERSION = "0.0.1"
@@ -102,7 +41,15 @@ COLOR ********
     other_tanh x
 
   #
-  # ALCOHOL
+  # Mash
+  #
+
+  brewmath.StrikeTemperature = (grainWeight, grainTemp, targetTemp, targetRatio) ->
+    (0.2 / targetRatio) * (targetTemp - grainTemp) + targetTemp
+    
+
+  #
+  # Alcohol
   #
 
   # Calculate the alcohol percentage by volume
