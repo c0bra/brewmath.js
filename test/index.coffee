@@ -93,6 +93,27 @@ describe "SRMtoEBC", ->
       srm = brewmath.SRMtoEBC(0)
       srm.should.eql 0
 
+describe "SRMtoHEX", ->
+  describe "with 1", ->
+    it "returns '#F3F993'", ->
+      hex = brewmath.SRMtoHEX(1)
+      hex.should.eql "#F3F993"
+
+  describe "with 30", ->
+    it "returns '#050B0A'", ->
+      hex = brewmath.SRMtoHEX(30)
+      hex.should.eql "#050B0A"
+
+  describe "with 31", ->
+    it "returns '#000000'", ->
+      hex = brewmath.SRMtoHEX(31)
+      hex.should.eql "#000000"
+
+  describe "with 400", ->
+    it "returns '#000000'", ->
+      hex = brewmath.SRMtoHEX(400)
+      hex.should.eql "#000000"
+
 
 #
 # Mash Tests
